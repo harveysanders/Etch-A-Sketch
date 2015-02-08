@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Etch-A-Sketch?</title>
+        <style type="text/css">
+           <!--CSS in <style> element does not work on dynamically created HTML.
+           Use jQuery .css() to change attributes after creation.-->
+            
+        </style>
+    </head>
+    
+    <body>
+        <div class="container">
+            
+        </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script>
+       	$( document ).ready(function(){
+            // Create 16x16 grid of square 
+            
+            var squareSize = 50;
+            var stringify = function(n) {
+                return (n.toString()) + "px";
+            }
+            
+            var gridSize = squareSize * 16;
+            
+            for (var i=0; i< Math.pow(16,2); i++ ) {
+                $('.container').append('<div class="square">test</div>\n');
+            }
+            
+            //---------------------CSS--------------------------
+            
+            $('.container').css({"height": stringify(gridSize), "width": stringify(gridSize)});
+            $(".square").css({
+                "height": stringify(squareSize), 
+                "width": stringify(squareSize),
+                "border": "1px solid #000000",
+                "float": "left",
+            });
+            
+       	}).call();
+        
+    </script>
+    </body>
+</html>
