@@ -71,13 +71,12 @@
             //---------------------Style Changes--------------------------
             
             
-            var changeSquareOnHover = function(){
-                $('.square').hover(function() {
-                    $( this ).addClass('hover');
-                    $('.hover').css({'backgroundColor': randomHexColor()});
-                }, function() {
+            var changeSquareOnHover = function() {
+                $('.square').mouseenter(function() {
+                    $( this ).css({'backgroundColor': randomHexColor()});
                 });
-            };
+            }
+             
             
             changeSquareOnHover();
                 
