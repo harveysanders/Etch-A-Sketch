@@ -28,50 +28,65 @@
        	$( document ).ready(function(){
             // Create 16x16 grid of square 
             
+            var squareSize;
+            var randomHexColor = function() {
+                var randomHexNum = function() {return (Math.floor(Math.random()*255) + 1).toString(16);};
+                var result = '#' + randomHexNum() + randomHexNum() +randomHexNum();
+                return result;
+            };
             
-            var squareSize = 25;
             var stringify = function(n) {
                 return (n.toString()) + "px";
             };
-            
-            var gridSize = squareSize * 16;
-            
-            var createGrid = function(resolution) {
+
+            var createGrid = function(resolution, gridSize) {
+                
                 if (resolution == null) {
                     resolution = 16;
                 } else {
                     resolution = resolution; 
                 }
-                
+                if (gridSize == null) {
+                    gridSize = 400;
+                    squareSize = gridSize/ resolution;
+                } else {
+                    gridSize = gridSize;
+                    squareSize = gridSize / resolution;
+                }
                 for (var i=0; i< Math.pow(resolution,2); i++ ) {
                     $('.grid').append('<div class="square"></div>\n');
-                }     
+                }
+                console.log(resolution, " x ", resolution, " grid created.");
+                $('.grid').css({"height": stringify(gridSize), "width": stringify(gridSize)});
+                $(".square").css({
+                "height": stringify(squareSize), 
+                "width": stringify(squareSize),
+                "backgroundColor": "#91e869",
+                "float": "left",
+                });
             };
             
             createGrid();
             
             //---------------------Style Changes--------------------------
             
-            $('.grid').css({"height": stringify(gridSize), "width": stringify(gridSize)});
-            $(".square").css({
-                "height": stringify(squareSize), 
-                "width": stringify(squareSize),
-                "backgroundColor": "#91e869",
-                "float": "left",
-            });
             
-            $('.square').hover(function() {
-                $( this ).addClass('hover');
-                $('.hover').css({'backgroundColor': '#980606'});
-            }, function() {
-                console.log('mouse out');
-            });
+            var changeSquareOnHover = function(){
+                $('.square').hover(function() {
+                    $( this ).addClass('hover');
+                    $('.hover').css({'backgroundColor': randomHexColor()});
+                }, function() {
+                });
+            };
+            
+            changeSquareOnHover();
                 
             $('#resetButton').click(function() {
-                $('.square').css({'backgroundColor': '#91e869'});
+                $('.grid').html("");
                 $('.square').removeClass('hover');
-                var resolution = prompt("How many squares per side would you like?");
+                var resolution = parseInt(prompt("How many squares per side would you like?\n(Max:100)"));
                 createGrid(resolution);
+                changeSquareOnHover();
             });    
             
        	}).call();
