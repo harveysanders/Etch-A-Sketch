@@ -3,8 +3,8 @@
     <head>
         <title>Etch-A-Sketch?</title>
         <style type="text/css">
-           <!--CSS in <style> element does not work on dynamically created HTML.
-           Use jQuery .css() to change attributes after creation.-->
+           /*CSS in <style> element does not work on dynamically created HTML.
+           Use jQuery .css() to change attributes after creation.*/
             
             span {
                 margin-left: 200px;
@@ -19,14 +19,14 @@
     </head>
     
     <body>
-        <div class="container">
+        <div class="demo_container">
             <button id="resetButton">Reset</button>
             <div class="grid"></div>
         </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script>
        	$( document ).ready(function(){
-            // Create 16x16 grid of square 
+            
             
             var squareSize;
             var randomHexColor = function() {
@@ -43,7 +43,9 @@
                 
                 if (resolution == null) {
                     resolution = 16;
-                } else {
+                } else if (resolution > 100) {
+                    resolution = 100;
+                }else {
                     resolution = resolution; 
                 }
                 if (gridSize == null) {
@@ -61,29 +63,23 @@
                 $(".square").css({
                 "height": stringify(squareSize), 
                 "width": stringify(squareSize),
-                "backgroundColor": "#91e869",
+                "backgroundColor": randomHexColor(),// original color: "#91e869",
                 "float": "left",
                 });
             };
-            
-            createGrid();
-            
-            //---------------------Style Changes--------------------------
-            
             
             var changeSquareOnHover = function() {
                 $('.square').mouseenter(function() {
                     $( this ).css({'backgroundColor': randomHexColor()});
                 });
             }
-             
-            
+
+            createGrid(16);
             changeSquareOnHover();
                 
             $('#resetButton').click(function() {
-                $('.grid').html("");
-                $('.square').removeClass('hover');
                 var resolution = parseInt(prompt("How many squares per side would you like?\n(Max:100)"));
+                $('.grid').html("");
                 createGrid(resolution);
                 changeSquareOnHover();
             });    
