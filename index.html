@@ -3,101 +3,25 @@
     <head>
         <title>Etch-A-Sketch?</title>
         <style type="text/css">
-           /* CSS in <style> element does not work on dynamically created HTML.
-           Use jQuery .css() to change attributes after creation. */
-            
-            span {
-                margin-left: 200px;
-                width:40px;
-                height:10px;
-                border: 1px black solid;
-            } 
-            
+           /*
+           CSS in <style> element does not work on dynamically created HTML.
+           Use jQuery .css() to change attributes after creation.
+           */ 
             button {
                 margin-left:170px;
             }
-            
         </style>
     </head>
     
     <body>
-        <div class="container">
+        
+        <div class="demo_container">
             <button id="resetButton">Reset</button>
             <div class="grid"></div>
         </div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script>
-       	$( document ).ready(function(){
-            // Create 16x16 grid of square 
-            
-            var squareSize;
-            
-            var createSketchpad = function(target) {
-                $(target).append('<button id="resetButton">Reset</button>');
-            };
-            
-            var randomHexColor = function() {
-                var randomHexNum = function() {return (Math.floor(Math.random()*255) + 1).toString(16);};
-                var result = '#' + randomHexNum() + randomHexNum() +randomHexNum();
-                return result;
-            };
-            
-            var stringify = function(n) {
-                return (n.toString()) + "px";
-            };
-
-            var createGrid = function(resolution, gridSize) {
-                
-                
-                if (resolution == null) {
-                    resolution = 16;
-                } else {
-                    resolution = resolution; 
-                }
-                if (gridSize == null) {
-                    gridSize = 400;
-                    squareSize = gridSize/ resolution;
-                } else {
-                    gridSize = gridSize;
-                    squareSize = gridSize / resolution;
-                }
-                for (var i=0; i< Math.pow(resolution,2); i++ ) {
-                    $('.grid').append('<div class="square"></div>\n');
-                }
-                console.log(resolution, " x ", resolution, " grid created.");
-                $('.grid').css({"height": stringify(gridSize), "width": stringify(gridSize)});
-                $(".square").css({
-                "height": stringify(squareSize), 
-                "width": stringify(squareSize),
-                "backgroundColor": "#91e869",
-                "float": "left",
-                });
-            };
-            
-            createGrid();
-            
-            //---------------------Style Changes--------------------------
-            
-            
-            var changeSquareOnHover = function() {
-                $('.square').mouseenter(function() {
-                    $( this ).css({'backgroundColor': randomHexColor()});
-                });
-            }
-             
-            
-            changeSquareOnHover();
-                
-            $('#resetButton').click(function() {
-                $('.grid').html("");
-                $('.square').removeClass('hover');
-                var resolution = parseInt(prompt("How many squares per side would you like?\n(Max:100)"));
-                createGrid(resolution);
-                changeSquareOnHover();
-            });    
-            
-       	}).call();
         
-    </script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="script.js"></script>
+
     </body>
 </html>
