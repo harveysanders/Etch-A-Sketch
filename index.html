@@ -3,18 +3,20 @@
     <head>
         <title>Etch-A-Sketch?</title>
         <style type="text/css">
-           <!--CSS in <style> element does not work on dynamically created HTML.
-           Use jQuery .css() to change attributes after creation.-->
+           /* CSS in <style> element does not work on dynamically created HTML.
+           Use jQuery .css() to change attributes after creation. */
             
             span {
                 margin-left: 200px;
                 width:40px;
                 height:10px;
                 border: 1px black solid;
-            }   
+            } 
+            
             button {
                 margin-left:170px;
             }
+            
         </style>
     </head>
     
@@ -29,6 +31,11 @@
             // Create 16x16 grid of square 
             
             var squareSize;
+            
+            var createSketchpad = function(target) {
+                $(target).append('<button id="resetButton">Reset</button>');
+            };
+            
             var randomHexColor = function() {
                 var randomHexNum = function() {return (Math.floor(Math.random()*255) + 1).toString(16);};
                 var result = '#' + randomHexNum() + randomHexNum() +randomHexNum();
@@ -40,6 +47,7 @@
             };
 
             var createGrid = function(resolution, gridSize) {
+                
                 
                 if (resolution == null) {
                     resolution = 16;
